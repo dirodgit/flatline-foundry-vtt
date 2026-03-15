@@ -1,0 +1,60 @@
+{{!-- FLATLINE | Aba: Holomancia --}}
+<div class="holomancia-tab">
+
+  {{!-- Status da Interface --}}
+  <div class="interface-status">
+    <div class="holomatriz-row">
+      <label>
+        <input type="checkbox" name="system.holomatriz.active" {{checked system.holomatriz.active}}/>
+        {{localize "FLATLINE.Holomatriz.Label"}}
+      </label>
+      <label>
+        <input type="checkbox" name="system.holomatriz.interfaceNeural" {{checked system.holomatriz.interfaceNeural}}/>
+        {{localize "FLATLINE.InterfaceNeural.Label"}}
+      </label>
+      <label>
+        <input type="checkbox" name="system.holomatriz.tagActive" {{checked system.holomatriz.tagActive}}/>
+        {{localize "FLATLINE.TagID.Label"}}
+      </label>
+    </div>
+    {{#unless system.holomatriz.interfaceNeural}}
+      <p class="hint warning">{{localize "FLATLINE.Holomancia.RequiresInterface"}}</p>
+    {{/unless}}
+  </div>
+
+  {{!-- RAM (espelhado aqui para referência) --}}
+  <div class="ram-mini">
+    <span class="ram-label">RAM: {{resources.ram.value}} / {{resources.ram.max}}</span>
+    <span class="threshold-label">{{localize "FLATLINE.RAM.Threshold"}}: {{ramThreshold}}</span>
+  </div>
+
+  {{!-- PROGRAMAS --}}
+  <div class="programas-section">
+    <div class="section-header">
+      <h3>{{localize "FLATLINE.ItemType.programa"}}</h3>
+      <button class="item-create" data-type="programa">+</button>
+    </div>
+    <ul class="items-list programas-list">
+      {{#each programas}}
+        <li class="item flexrow" data-item-id="{{this.id}}">
+          <img class="item-image" src="{{this.img}}" alt="{{this.name}}"/>
+          <span class="item-name">{{this.name}}</span>
+          <span class="item-stat nivel">N{{this.system.nivel}}</span>
+          <span class="item-stat ram">{{this.system.ramCost}} RAM</span>
+          <span class="item-stat conf {{#if (lte this.system.confiabilidade.value 2)}}low{{/if}}">
+            {{this.system.confiabilidade.value}}/{{this.system.confiabilidade.max}}
+          </span>
+          {{#if this.system.crackeado}}
+            <span class="crackeado-badge">{{localize "FLATLINE.Programa.Crackeado"}}</span>
+          {{/if}}
+          <div class="item-controls">
+            <button class="item-post"   data-tooltip="{{localize 'FLATLINE.Item.Post'}}">💬</button>
+            <button class="item-edit"   data-tooltip="{{localize 'FLATLINE.Item.Edit'}}">✏</button>
+            <button class="item-delete" data-tooltip="{{localize 'FLATLINE.Item.Delete'}}">🗑</button>
+          </div>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+
+</div>

@@ -1,0 +1,58 @@
+{{!-- FLATLINE | Ficha de Programa --}}
+<form class="flatline-sheet item-sheet programa-sheet" autocomplete="off">
+  <header class="item-sheet-header">
+    <img class="item-image" src="{{item.img}}" data-edit="img" alt="{{item.name}}"/>
+    <div class="item-header-fields">
+      <input class="item-name" type="text" name="name" value="{{item.name}}"/>
+      <span class="item-type-badge">{{localize "FLATLINE.ItemType.programa"}}</span>
+    </div>
+  </header>
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="details">{{localize "FLATLINE.Item.Tab.Details"}}</a>
+    <a class="item" data-tab="desc">{{localize "FLATLINE.Item.Tab.Desc"}}</a>
+  </nav>
+  <section class="sheet-body">
+    <div class="tab" data-tab="details">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>{{localize "FLATLINE.Programa.Disciplina"}}</label>
+          <input type="text" name="system.disciplina" value="{{system.disciplina}}"
+                 placeholder="{{localize 'FLATLINE.Programa.DisciplinaPlaceholder'}}"/>
+        </div>
+        <div class="form-group">
+          <label>{{localize "FLATLINE.Programa.Nivel"}}</label>
+          <select name="system.nivel">
+            <option value="1" {{selected 1 system.nivel}}>1</option>
+            <option value="2" {{selected 2 system.nivel}}>2</option>
+            <option value="3" {{selected 3 system.nivel}}>3</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>{{localize "FLATLINE.Programa.RAMCost"}}</label>
+          <input type="number" name="system.ramCost" value="{{system.ramCost}}" min="1" max="3"/>
+        </div>
+        <div class="form-group">
+          <label>{{localize "FLATLINE.Item.Confiabilidade"}}</label>
+          <div class="conf-row">
+            <input type="number" name="system.confiabilidade.value" value="{{system.confiabilidade.value}}" min="0"/>
+            <span>/</span>
+            <input type="number" name="system.confiabilidade.max"   value="{{system.confiabilidade.max}}"   min="1"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>{{localize "FLATLINE.CRED.Label"}}</label>
+          <input type="number" name="system.cred" value="{{system.cred}}" min="0"/>
+        </div>
+        <div class="form-group checkbox-group">
+          <label>
+            <input type="checkbox" name="system.crackeado" {{checked system.crackeado}}/>
+            {{localize "FLATLINE.Programa.Crackeado"}}
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="tab" data-tab="desc">
+      {{editor system.description target="system.description" button=true engine="prosemirror" collaborate=false}}
+    </div>
+  </section>
+</form>

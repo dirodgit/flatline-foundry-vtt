@@ -1,0 +1,66 @@
+{{!-- FLATLINE | Ficha do Corredor --}}
+<form class="flatline-sheet corredor-sheet" autocomplete="off">
+
+  {{!-- HEADER --}}
+  <header class="sheet-header">
+    <div class="actor-image">
+      <img src="{{actor.img}}" data-tooltip="{{actor.name}}" data-edit="img" alt="{{actor.name}}"/>
+    </div>
+    <div class="header-fields">
+      <div class="actor-name-row">
+        <input class="actor-name" type="text" name="name" value="{{actor.name}}" placeholder="Nome do Corredor"/>
+        <select class="archetype-select" name="system.archetype">
+          {{#each archetypes}}
+            <option value="{{this.value}}" {{selected this.value ../system.archetype}}>{{this.label}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="concept-row">
+        <input type="text" name="system.concept" value="{{system.concept}}" placeholder="{{localize 'FLATLINE.Sheet.Concept'}}"/>
+      </div>
+      {{!-- Recursos rápidos --}}
+      <div class="quick-resources">
+        {{> "systems/flatline/templates/actor/partials/resources-bar.hbs"}}
+      </div>
+    </div>
+  </header>
+
+  {{!-- NAVEGAÇÃO --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="stats">{{localize "FLATLINE.Sheet.Tab.Stats"}}</a>
+    <a class="item" data-tab="combat">{{localize "FLATLINE.Sheet.Tab.Combat"}}</a>
+    <a class="item" data-tab="inventory">{{localize "FLATLINE.Sheet.Tab.Inventory"}}</a>
+    <a class="item" data-tab="holomancia">{{localize "FLATLINE.Sheet.Tab.Holomancia"}}</a>
+    <a class="item" data-tab="bio">{{localize "FLATLINE.Sheet.Tab.Bio"}}</a>
+  </nav>
+
+  {{!-- CORPO --}}
+  <section class="sheet-body">
+
+    {{!-- ABA: STATS --}}
+    <div class="tab" data-tab="stats">
+      {{> "systems/flatline/templates/actor/sheet-tabs/stats-tab.hbs"}}
+    </div>
+
+    {{!-- ABA: COMBATE --}}
+    <div class="tab" data-tab="combat">
+      {{> "systems/flatline/templates/actor/sheet-tabs/combat-tab.hbs"}}
+    </div>
+
+    {{!-- ABA: INVENTÁRIO --}}
+    <div class="tab" data-tab="inventory">
+      {{> "systems/flatline/templates/actor/sheet-tabs/inventory-tab.hbs"}}
+    </div>
+
+    {{!-- ABA: HOLOMANCIA --}}
+    <div class="tab" data-tab="holomancia">
+      {{> "systems/flatline/templates/actor/sheet-tabs/holomancia-tab.hbs"}}
+    </div>
+
+    {{!-- ABA: BIO --}}
+    <div class="tab" data-tab="bio">
+      {{> "systems/flatline/templates/actor/sheet-tabs/bio-tab.hbs"}}
+    </div>
+
+  </section>
+</form>

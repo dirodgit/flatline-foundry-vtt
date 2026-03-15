@@ -1,0 +1,45 @@
+{{!-- FLATLINE | Ficha de Veículo --}}
+<form class="flatline-sheet veiculo-sheet" autocomplete="off">
+  <header class="sheet-header">
+    <div class="actor-image">
+      <img src="{{actor.img}}" data-edit="img" alt="{{actor.name}}"/>
+    </div>
+    <div class="header-fields">
+      <input class="actor-name" type="text" name="name" value="{{actor.name}}"/>
+    </div>
+  </header>
+
+  <section class="sheet-body" style="padding:12px">
+    <div class="veiculo-stats">
+      <div class="stat-row">
+        <label>{{localize "FLATLINE.Veiculo.Velocidade"}}</label>
+        <input type="number" name="system.velocidade" value="{{system.velocidade}}" min="1" max="10"/>
+      </div>
+      <div class="stat-row">
+        <label>{{localize "FLATLINE.Veiculo.Manobra"}}</label>
+        <select name="system.manobra">
+          <option value="6"  {{selected 6  system.manobra}}>D (D6)</option>
+          <option value="8"  {{selected 8  system.manobra}}>C (D8)</option>
+          <option value="10" {{selected 10 system.manobra}}>B (D10)</option>
+          <option value="12" {{selected 12 system.manobra}}>A (D12)</option>
+        </select>
+      </div>
+      <div class="stat-row">
+        <label>{{localize "FLATLINE.Veiculo.Armadura"}}</label>
+        <input type="number" name="system.armadura" value="{{system.armadura}}" min="0"/>
+      </div>
+      <div class="stat-row">
+        <label>{{localize "FLATLINE.Item.Confiabilidade"}}</label>
+        <input type="number" name="system.confiabilidade.value" value="{{system.confiabilidade.value}}" min="0" max="{{system.confiabilidade.max}}"/>
+        <span>/ {{system.confiabilidade.max}}</span>
+      </div>
+      <div class="stat-row">
+        <label>{{localize "FLATLINE.Veiculo.Passageiros"}}</label>
+        <input type="number" name="system.passageiros" value="{{system.passageiros}}" min="1"/>
+      </div>
+    </div>
+    <div class="background-section" style="margin-top:12px">
+      {{editor system.description target="system.description" button=true engine="prosemirror" collaborate=false}}
+    </div>
+  </section>
+</form>

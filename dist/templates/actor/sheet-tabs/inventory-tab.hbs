@@ -1,0 +1,107 @@
+{{!-- FLATLINE | Aba: Inventário --}}
+<div class="inventory-tab">
+
+  {{!-- CARGA --}}
+  <div class="carga-info">
+    <span>{{localize "FLATLINE.Carga.Label"}}: {{carga.max}} {{localize "FLATLINE.Carga.Slots"}}</span>
+  </div>
+
+  {{!-- CYBERWARE --}}
+  <div class="cyberware-section">
+    <div class="section-header">
+      <h3>{{localize "FLATLINE.ItemType.cyberware"}}</h3>
+      <button class="item-create" data-type="cyberware">+</button>
+    </div>
+    <ul class="items-list cyberware-list">
+      {{#each cyberwares}}
+        <li class="item flexrow {{#if this.system.instalado}}installed{{/if}}" data-item-id="{{this.id}}">
+          <img class="item-image" src="{{this.img}}" alt="{{this.name}}"/>
+          <span class="item-name">{{this.name}}</span>
+          <span class="item-stat categoria">{{this.system.categoria}}</span>
+          {{#if this.system.ramCost}}
+            <span class="item-stat ram-cost">{{this.system.ramCost}} RAM</span>
+          {{/if}}
+          <span class="installed-badge {{#if this.system.instalado}}active{{/if}}">
+            {{#if this.system.instalado}}✓{{else}}○{{/if}}
+          </span>
+          <div class="item-controls">
+            <button class="item-edit"   data-tooltip="{{localize 'FLATLINE.Item.Edit'}}">✏</button>
+            <button class="item-delete" data-tooltip="{{localize 'FLATLINE.Item.Delete'}}">🗑</button>
+          </div>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+
+  {{!-- ESPECIALIDADES --}}
+  <div class="especialidades-section">
+    <div class="section-header">
+      <h3>{{localize "FLATLINE.ItemType.especialidade"}}</h3>
+      <button class="item-create" data-type="especialidade">+</button>
+    </div>
+    <ul class="items-list especialidades-list">
+      {{#each especialidades}}
+        <li class="item flexrow" data-item-id="{{this.id}}">
+          <img class="item-image" src="{{this.img}}" alt="{{this.name}}"/>
+          <span class="item-name">{{this.name}}</span>
+          {{#if this.system.arquetipo}}
+            <span class="item-stat archetype-badge">{{this.system.arquetipo}}</span>
+          {{/if}}
+          <div class="item-controls">
+            <button class="item-post"   data-tooltip="{{localize 'FLATLINE.Item.Post'}}">💬</button>
+            <button class="item-edit"   data-tooltip="{{localize 'FLATLINE.Item.Edit'}}">✏</button>
+            <button class="item-delete" data-tooltip="{{localize 'FLATLINE.Item.Delete'}}">🗑</button>
+          </div>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+
+  {{!-- EQUIPAMENTOS --}}
+  <div class="equipamentos-section">
+    <div class="section-header">
+      <h3>{{localize "FLATLINE.ItemType.equipamento"}}</h3>
+      <button class="item-create" data-type="equipamento">+</button>
+    </div>
+    <ul class="items-list equipamentos-list">
+      {{#each equipamentos}}
+        <li class="item flexrow" data-item-id="{{this.id}}">
+          <img class="item-image" src="{{this.img}}" alt="{{this.name}}"/>
+          <span class="item-name">{{this.name}}</span>
+          <span class="item-stat">×{{this.system.quantidade}}</span>
+          {{#if this.system.confiabilidade}}
+            <span class="item-stat conf">{{this.system.confiabilidade.value}}/{{this.system.confiabilidade.max}}</span>
+          {{/if}}
+          <div class="item-controls">
+            <button class="item-post"   data-tooltip="{{localize 'FLATLINE.Item.Post'}}">💬</button>
+            <button class="item-edit"   data-tooltip="{{localize 'FLATLINE.Item.Edit'}}">✏</button>
+            <button class="item-delete" data-tooltip="{{localize 'FLATLINE.Item.Delete'}}">🗑</button>
+          </div>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+
+  {{!-- LESÕES CRÍTICAS --}}
+  {{#if lesoes.length}}
+  <div class="lesoes-section">
+    <div class="section-header">
+      <h3>{{localize "FLATLINE.ItemType.lesao"}}</h3>
+    </div>
+    <ul class="items-list lesoes-list">
+      {{#each lesoes}}
+        <li class="item flexrow lesao {{this.system.categoria}} {{#if this.system.permanente}}permanente{{/if}}" data-item-id="{{this.id}}">
+          <span class="lesao-code">{{this.system.codigo}}</span>
+          <span class="item-name">{{this.name}}</span>
+          {{#if this.system.permanente}}<span class="perm-badge">{{localize "FLATLINE.Item.Permanente"}}</span>{{/if}}
+          <div class="item-controls">
+            <button class="item-edit"   data-tooltip="{{localize 'FLATLINE.Item.Edit'}}">✏</button>
+            <button class="item-delete" data-tooltip="{{localize 'FLATLINE.Item.Delete'}}">🗑</button>
+          </div>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+  {{/if}}
+
+</div>

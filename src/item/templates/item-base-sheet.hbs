@@ -1,0 +1,35 @@
+{{!-- FLATLINE | Base de Ficha de Item --}}
+<form class="flatline-sheet item-sheet {{item.type}}-sheet" autocomplete="off">
+  <header class="item-sheet-header">
+    <img class="item-image" src="{{item.img}}" data-edit="img" alt="{{item.name}}" title="{{item.name}}"/>
+    <div class="item-header-fields">
+      <input class="item-name" type="text" name="name" value="{{item.name}}" placeholder="{{localize 'FLATLINE.Item.NamePlaceholder'}}"/>
+      <div class="item-type-badge">{{localize (concat "FLATLINE.ItemType." item.type)}}</div>
+    </div>
+  </header>
+
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="desc">{{localize "FLATLINE.Item.Tab.Desc"}}</a>
+    <a class="item" data-tab="details">{{localize "FLATLINE.Item.Tab.Details"}}</a>
+  </nav>
+
+  <section class="sheet-body">
+    {{!-- ABA DESCRIÇÃO (comum a todos) --}}
+    <div class="tab" data-tab="desc">
+      <div class="desc-tab">
+        <div class="form-group cred-group">
+          <label>{{localize "FLATLINE.CRED.Label"}}</label>
+          <input type="number" name="system.cred" value="{{system.cred}}" min="0"/>
+        </div>
+        <div class="description-editor">
+          {{editor system.description target="system.description" button=true engine="prosemirror" collaborate=false}}
+        </div>
+      </div>
+    </div>
+
+    {{!-- ABA DETALHES (específica por tipo — injetada pelo template pai) --}}
+    <div class="tab" data-tab="details">
+      {{> (concat "systems/flatline/templates/item/" item.type "-details.hbs")}}
+    </div>
+  </section>
+</form>

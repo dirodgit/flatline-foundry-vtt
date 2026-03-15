@@ -1,0 +1,88 @@
+{{!-- FLATLINE | Chat Card de Rolagem --}}
+<div class="flatline-roll-card {{#if isPush}}pushed{{/if}}">
+
+  <div class="roll-header">
+    <img class="actor-portrait" src="{{actor.img}}" alt="{{actor.name}}"/>
+    <div class="roll-info">
+      <span class="actor-name">{{actor.name}}</span>
+      <span class="roll-title">
+        {{#if skillLabel}}
+          {{attrLabel}} + {{skillLabel}}
+        {{else}}
+          {{attrLabel}}
+        {{/if}}
+        {{#if modifier}}
+          <span class="modifier {{#if (gt modifier 0)}}positive{{else}}negative{{/if}}">
+            {{#if (gt modifier 0)}}+{{/if}}{{modifier}}
+          </span>
+        {{/if}}
+      </span>
+      {{#if flavor}}
+        <span class="roll-flavor">{{flavor}}</span>
+      {{/if}}
+      {{#if isPush}}
+        <span class="push-badge">⚡ {{localize "FLATLINE.Roll.Pushed"}}</span>
+      {{/if}}
+    </div>
+  </div>
+
+  <div class="dice-pool">
+    {{#each dice}}
+      <div class="die-result die-{{this.size}} type-{{this.type}}
+                  {{#if this.isGlitch}}glitch{{/if}}
+                  {{#if (gte this.successes 2)}}double-success{{else if (eq this.successes 1)}}success{{/if}}">
+        <span class="die-value">{{this.value}}</span>
+        {{#if this.isGlitch}}<span class="glitch-marker">!</span>{{/if}}
+        {{#if (gte this.successes 2)}}<span class="success-star">★★</span>
+        {{else if (eq this.successes 1)}}<span class="success-star">★</span>{{/if}}
+      </div>
+    {{/each}}
+  </div>
+
+  <div class="roll-result">
+    {{#if (gt successes 0)}}
+      <div class="result success">
+        <span class="result-icon">✓</span>
+        <span class="result-text">
+          {{#if (gte successes 3)}}
+            {{localize "FLATLINE.Roll.ExceptionalSuccess"}}
+          {{else if (gte successes 2)}}
+            {{localize "FLATLINE.Roll.BonusSuccess"}}
+          {{else}}
+            {{localize "FLATLINE.Roll.Success"}}
+          {{/if}}
+        </span>
+        <span class="successes-count">{{successes}} ★</span>
+      </div>
+    {{else}}
+      <div class="result failure">
+        <span class="result-icon">✗</span>
+        <span class="result-text">{{localize "FLATLINE.Roll.Failure"}}</span>
+      </div>
+    {{/if}}
+
+    {{!-- Glitch warnings --}}
+    {{#if (gt glitches.attribute 0)}}
+      <div class="glitch-warning">⚠ {{localize "FLATLINE.Roll.GlitchAttribute"}}</div>
+    {{/if}}
+    {{#if (gt glitches.skill 0)}}
+      <div class="glitch-warning">⚠ {{localize "FLATLINE.Roll.GlitchSkill"}}</div>
+    {{/if}}
+    {{#if (gt glitches.equip 0)}}
+      <div class="glitch-warning">⚠ {{localize "FLATLINE.Roll.GlitchEquip"}}</div>
+    {{/if}}
+  </div>
+
+  {{!-- BOTÃO FORÇAR --}}
+  {{#if canPush}}
+    <div class="push-section">
+      <button class="flatline-push-btn"
+              data-roll-id="{{rollId}}"
+              data-tooltip="{{localize 'FLATLINE.Roll.PushTooltip'}}">
+        ⚡ {{localize "FLATLINE.Roll.Push"}}
+      </button>
+      <span class="push-hint">{{localize "FLATLINE.Roll.PushHint"}}</span>
+    </div>
+  {{/if}}
+
+</div>

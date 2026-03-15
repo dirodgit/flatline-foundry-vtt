@@ -1,0 +1,65 @@
+# .github/workflows/ci.yml
+# Roda em todo PR e push para main — verifica se o build passa
+
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Bundle
+        run: node tools/bundle.mjs
+
+      - name: Validate system.json
+        run: |
+          node -e "
+            const fs   = require('fs');
+            const json = JSON.parse(fs.readFileSync('dist/system.json', 'utf8'));
+            const required = ['id','title','version','compatibility','esmodules','styles','languages'];
+            for (const key of required) {
+              if (!json[key]) { console.error('Faltando campo:', key); process.exit(1); }
+            }
+            console.log('system.json válido — v' + json.version);
+          "
+
+      - name: Validate template.json
+        run: |
+          node -e "
+            const fs   = require('fs');
+            const json = JSON.parse(fs.readFileSync('dist/template.json', 'utf8'));
+            if (!json.Actor || !json.Item) { console.error('template.json inválido'); process.exit(1); }
+            console.log('template.json válido');
+            console.log('  Actor types:', json.Actor.types.join(', '));
+            console.log('  Item types:', json.Item.types.join(', '));
+          "
+
+      - name: Check dist output
+        run: |
+          echo "=== Arquivos em dist/ ==="
+          find dist/ -type f | sort
+          echo ""
+          echo "=== Tamanho do bundle JS ==="
+          ls -lh dist/flatline.js
+          echo ""
+          echo "=== Tamanho do CSS ==="
+          ls -lh dist/flatline.css

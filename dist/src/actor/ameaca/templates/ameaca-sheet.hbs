@@ -1,0 +1,116 @@
+{{!-- FLATLINE | Ficha de Ameaça (PNJ) --}}
+<form class="flatline-sheet ameaca-sheet" autocomplete="off">
+  <header class="sheet-header">
+    <div class="actor-image">
+      <img src="{{actor.img}}" data-edit="img" alt="{{actor.name}}"/>
+    </div>
+    <div class="header-fields">
+      <input class="actor-name" type="text" name="name" value="{{actor.name}}"/>
+      <div class="threat-row">
+        <label>{{localize "FLATLINE.Ameaca.Nivel"}}</label>
+        <select name="system.threat">
+          <option value="leve"   {{selected "leve"   system.threat}}>{{localize "FLATLINE.Ameaca.Leve"}}</option>
+          <option value="medio"  {{selected "medio"  system.threat}}>{{localize "FLATLINE.Ameaca.Medio"}}</option>
+          <option value="grave"  {{selected "grave"  system.threat}}>{{localize "FLATLINE.Ameaca.Grave"}}</option>
+          <option value="critico"{{selected "critico" system.threat}}>{{localize "FLATLINE.Ameaca.Critico"}}</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="stats">{{localize "FLATLINE.Sheet.Tab.Stats"}}</a>
+    <a class="item" data-tab="bio">Bio</a>
+  </nav>
+
+  <section class="sheet-body">
+    <div class="tab" data-tab="stats">
+      <div class="attributes-skills-grid">
+        {{#each-in attributes}}
+        <div class="attribute-column" data-attribute="{{@key}}">
+          <div class="attribute-header">
+            <button class="roll-attribute attribute-btn" data-attribute="{{@key}}">
+              <span class="attr-label">{{this.label}}</span>
+              <span class="attr-die">{{this.dieLetter}}</span>
+            </button>
+            <input class="attr-value" type="number" name="system.attributes.{{@key}}.value"
+                   value="{{this.value}}" min="6" max="12" step="2"/>
+          </div>
+          <ul class="skills-list">
+            {{#each (lookup ../skillsByAttribute @key)}}
+            <li class="skill-item">
+              <button class="roll-skill skill-roll-btn" data-skill="{{this.key}}">
+                <span class="skill-name">{{this.label}}</span>
+                <span class="skill-die">{{this.dieLetter}}</span>
+              </button>
+              <select class="skill-value-select" name="system.skills.{{this.key}}.value">
+                <option value="0"  {{selected 0  this.value}}>—</option>
+                <option value="6"  {{selected 6  this.value}}>D</option>
+                <option value="8"  {{selected 8  this.value}}>C</option>
+                <option value="10" {{selected 10 this.value}}>B</option>
+                <option value="12" {{selected 12 this.value}}>A</option>
+              </select>
+            </li>
+            {{/each}}
+          </ul>
+        </div>
+        {{/each-in}}
+      </div>
+
+      {{!-- Condições --}}
+      <div class="conditions-section">
+        <h3 class="section-label">{{localize "FLATLINE.Conditions.Title"}}</h3>
+        <div class="conditions-grid">
+          <div class="condition-column fisica">
+            <div class="condition-header"><span>{{localize "FLATLINE.Conditions.Fisica"}}</span></div>
+            {{#each-in conditions.fisica}}
+              {{#unless (eq @key "broken")}}
+              <div class="condition-row grade-{{@key}} {{#if this.active}}active{{/if}}">
+                <span class="condition-grade-label">{{localize (concat "FLATLINE.Condition." @key)}}</span>
+                {{#if this.active}}<span class="condition-label">{{this.label}}</span>{{else}}<span class="condition-empty">—</span>{{/if}}
+              </div>
+              {{/unless}}
+            {{/each-in}}
+          </div>
+          <div class="condition-column mental">
+            <div class="condition-header"><span>{{localize "FLATLINE.Conditions.Mental"}}</span></div>
+            {{#each-in conditions.mental}}
+              {{#unless (eq @key "broken")}}
+              <div class="condition-row grade-{{@key}} {{#if this.active}}active{{/if}}">
+                <span class="condition-grade-label">{{localize (concat "FLATLINE.Condition." @key)}}</span>
+                {{#if this.active}}<span class="condition-label">{{this.label}}</span>{{else}}<span class="condition-empty">—</span>{{/if}}
+              </div>
+              {{/unless}}
+            {{/each-in}}
+          </div>
+        </div>
+      </div>
+
+      {{!-- Armas --}}
+      <div class="weapons-section">
+        <div class="section-header">
+          <h3>{{localize "FLATLINE.ItemType.arma"}}</h3>
+          <button class="item-create" data-type="arma">+</button>
+        </div>
+        <ul class="items-list">
+          {{#each armas}}
+          <li class="item flexrow" data-item-id="{{this.id}}">
+            <span class="item-name">{{this.name}}</span>
+            <span class="item-stat">{{this.system.dano}} dmg</span>
+            <div class="item-controls">
+              <button class="item-edit">✏</button>
+              <button class="item-delete">🗑</button>
+            </div>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab" data-tab="bio">
+      <div class="background-section">
+        {{editor system.description target="system.description" button=true engine="prosemirror" collaborate=false}}
+      </div>
+    </div>
+  </section>
+</form>

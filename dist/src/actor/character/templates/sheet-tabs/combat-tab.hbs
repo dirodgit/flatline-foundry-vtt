@@ -1,0 +1,77 @@
+{{!-- FLATLINE | Aba: Combate --}}
+<div class="combat-tab">
+
+  {{!-- RAM --}}
+  <div class="ram-section">
+    <div class="ram-header">
+      <h3>RAM</h3>
+      <span class="ram-threshold-label">{{localize "FLATLINE.RAM.Threshold"}}: {{ramThreshold}}</span>
+    </div>
+    <div class="ram-track">
+      {{#times 10}}
+        <div class="ram-pip {{#if (lte this ../resources.ram.value)}}active{{/if}}" data-value="{{this}}"></div>
+      {{/times}}
+    </div>
+    <div class="ram-controls">
+      <span class="ram-value">{{resources.ram.value}} / {{resources.ram.max}}</span>
+      <button class="ram-add"   data-tooltip="+1 RAM">+</button>
+      <button class="ram-spend" data-amount="1" data-tooltip="-1 RAM">−</button>
+      <button class="ram-reset" data-tooltip="{{localize 'FLATLINE.RAM.Reset'}}">↺</button>
+    </div>
+  </div>
+
+  {{!-- ARMAS --}}
+  <div class="weapons-section">
+    <div class="section-header">
+      <h3>{{localize "FLATLINE.ItemType.arma"}}</h3>
+      <button class="item-create" data-type="arma" data-tooltip="{{localize 'FLATLINE.Item.Create'}}">+</button>
+    </div>
+    <ul class="items-list armas-list">
+      {{#each armas}}
+        <li class="item flexrow" data-item-id="{{this.id}}">
+          <img class="item-image" src="{{this.img}}" alt="{{this.name}}"/>
+          <span class="item-name">{{this.name}}</span>
+          <span class="item-stat">{{localize "FLATLINE.Item.Dano"}}: {{this.system.dano}}</span>
+          <span class="item-stat range-label">{{localize (concat "FLATLINE.Range." this.system.alcance)}}</span>
+          <span class="item-stat conf">{{this.system.confiabilidade.value}}/{{this.system.confiabilidade.max}}</span>
+          <div class="item-controls">
+            <button class="item-roll"   data-tooltip="{{localize 'FLATLINE.Item.Roll'}}">🎲</button>
+            <button class="item-post"   data-tooltip="{{localize 'FLATLINE.Item.Post'}}">💬</button>
+            <button class="item-edit"   data-tooltip="{{localize 'FLATLINE.Item.Edit'}}">✏</button>
+            <button class="item-delete" data-tooltip="{{localize 'FLATLINE.Item.Delete'}}">🗑</button>
+          </div>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+
+  {{!-- ARMADURAS --}}
+  <div class="armors-section">
+    <div class="section-header">
+      <h3>{{localize "FLATLINE.ItemType.armadura"}}</h3>
+      <button class="item-create" data-type="armadura">+</button>
+    </div>
+    <ul class="items-list">
+      {{#each armaduras}}
+        <li class="item flexrow" data-item-id="{{this.id}}">
+          <img class="item-image" src="{{this.img}}" alt="{{this.name}}"/>
+          <span class="item-name">{{this.name}}</span>
+          <span class="item-stat">{{localize "FLATLINE.Item.Armadura"}}: {{this.system.armadura}}</span>
+          <span class="item-stat conf">{{this.system.confiabilidade.value}}/{{this.system.confiabilidade.max}}</span>
+          <div class="item-controls">
+            <button class="item-post"   data-tooltip="{{localize 'FLATLINE.Item.Post'}}">💬</button>
+            <button class="item-edit"   data-tooltip="{{localize 'FLATLINE.Item.Edit'}}">✏</button>
+            <button class="item-delete" data-tooltip="{{localize 'FLATLINE.Item.Delete'}}">🗑</button>
+          </div>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+
+  {{!-- INICIATIVA (guia rápido) --}}
+  <div class="initiative-guide">
+    <h3>{{localize "FLATLINE.Combat.Initiative"}}</h3>
+    <p class="hint">{{localize "FLATLINE.Combat.InitiativeHint"}}</p>
+  </div>
+
+</div>

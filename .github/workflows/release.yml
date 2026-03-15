@@ -1,0 +1,114 @@
+# .github/workflows/release.yml
+#
+# Dispara quando você faz push de uma tag vX.Y.Z
+# Faz build, gera o zip e cria o GitHub Release automaticamente.
+#
+# Fluxo:
+#   git tag v0.1.0
+#   git push origin v0.1.0
+#   → Actions builda, zipeia e publica o Release
+#   → Foundry pode instalar via URL do system.json
+
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # necessário para criar o Release
+
+    steps:
+      # 1. Checkout
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2. Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # 3. Instala dependências
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Build JS + SCSS
+      - name: Build
+        run: npm run build
+
+      # 5. Copia templates e static para dist/
+      - name: Bundle
+        run: node tools/bundle.mjs
+
+      # 6. Extrai versão da tag (ex: v0.1.0 → 0.1.0)
+      - name: Extract version
+        id: version
+        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
+
+      # 7. Atualiza system.json em dist/ com URLs corretas do release
+      - name: Patch system.json
+        run: |
+          VERSION=${{ steps.version.outputs.VERSION }}
+          REPO="${{ github.repository }}"
+          ZIP_URL="https://github.com/${REPO}/releases/download/v${VERSION}/flatline-fvtt_v${VERSION}.zip"
+          MANIFEST_URL="https://raw.githubusercontent.com/${REPO}/main/dist/system.json"
+
+          node -e "
+            const fs = require('fs');
+            const json = JSON.parse(fs.readFileSync('dist/system.json', 'utf8'));
+            json.version  = '${VERSION}';
+            json.manifest = '${MANIFEST_URL}';
+            json.download = '${ZIP_URL}';
+            fs.writeFileSync('dist/system.json', JSON.stringify(json, null, 2));
+            console.log('system.json atualizado:', json.version);
+          "
+
+      # 8. Gera o zip
+      - name: Create zip
+        run: |
+          VERSION=${{ steps.version.outputs.VERSION }}
+          cd dist
+          zip -r ../flatline-fvtt_v${VERSION}.zip .
+          echo "ZIP=flatline-fvtt_v${VERSION}.zip" >> $GITHUB_ENV
+
+      # 9. Commita dist/system.json atualizado de volta no main
+      #    (para que a URL raw do manifest sempre reflita a versão mais recente)
+      - name: Commit updated system.json
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          git checkout main
+          git add dist/system.json dist/template.json dist/lang/ || true
+          git diff --staged --quiet || git commit -m "chore: atualiza dist para v${{ steps.version.outputs.VERSION }} [skip ci]"
+          git push origin main
+
+      # 10. Cria o GitHub Release e anexa o zip
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "FLATLINE v${{ steps.version.outputs.VERSION }}"
+          body: |
+            ## FLATLINE v${{ steps.version.outputs.VERSION }}
+
+            ### Instalação no Foundry VTT
+
+            1. Abra o Foundry VTT
+            2. Vá em **Game Systems → Install System**
+            3. Cole a URL abaixo no campo **Manifest URL**:
+
+            ```
+            https://raw.githubusercontent.com/${{ github.repository }}/main/dist/system.json
+            ```
+
+            ### Changelog
+            _Veja [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md)_
+          files: ${{ env.ZIP }}
+          draft: false
+          prerelease: ${{ contains(steps.version.outputs.VERSION, '-') }}

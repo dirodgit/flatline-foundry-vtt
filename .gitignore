@@ -1,0 +1,15 @@
+node_modules/
+*.zip
+
+# dist/ é comittado — necessário para o manifest raw do GitHub
+# Descomente abaixo SE usar GitHub Pages em vez de raw.githubusercontent
+# dist/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp

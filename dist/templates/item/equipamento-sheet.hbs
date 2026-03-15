@@ -1,0 +1,39 @@
+{{!-- FLATLINE | Ficha de Equipamento --}}
+<form class="flatline-sheet item-sheet equipamento-sheet" autocomplete="off">
+  <header class="item-sheet-header">
+    <img class="item-image" src="{{item.img}}" data-edit="img" alt="{{item.name}}"/>
+    <div class="item-header-fields">
+      <input class="item-name" type="text" name="name" value="{{item.name}}"/>
+      <span class="item-type-badge">{{localize "FLATLINE.ItemType.equipamento"}}</span>
+    </div>
+  </header>
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="details">{{localize "FLATLINE.Item.Tab.Details"}}</a>
+    <a class="item" data-tab="desc">{{localize "FLATLINE.Item.Tab.Desc"}}</a>
+  </nav>
+  <section class="sheet-body">
+    <div class="tab" data-tab="details">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>{{localize "FLATLINE.Item.Quantidade"}}</label>
+          <input type="number" name="system.quantidade" value="{{system.quantidade}}" min="0"/>
+        </div>
+        <div class="form-group">
+          <label>{{localize "FLATLINE.CRED.Label"}}</label>
+          <input type="number" name="system.cred" value="{{system.cred}}" min="0"/>
+        </div>
+        <div class="form-group">
+          <label>{{localize "FLATLINE.Item.Confiabilidade"}}</label>
+          <div class="conf-row">
+            <input type="number" name="system.confiabilidade.value" value="{{system.confiabilidade.value}}" min="0"/>
+            <span>/</span>
+            <input type="number" name="system.confiabilidade.max"   value="{{system.confiabilidade.max}}"   min="1"/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab" data-tab="desc">
+      {{editor system.description target="system.description" button=true engine="prosemirror" collaborate=false}}
+    </div>
+  </section>
+</form>

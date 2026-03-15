@@ -1,0 +1,67 @@
+{{!-- FLATLINE | Aba: Bio / Traços --}}
+<div class="bio-tab">
+
+  {{!-- RECURSOS --}}
+  <div class="resources-section">
+    <div class="resource-row">
+      <label>{{localize "FLATLINE.CRED.Label"}}</label>
+      <input type="number" name="system.resources.cred.value" value="{{resources.cred.value}}" min="0"/>
+      <select name="system.resources.cred.die" data-tooltip="{{localize 'FLATLINE.CRED.Die'}}">
+        <option value="6"  {{selected 6  resources.cred.die}}>D6</option>
+        <option value="8"  {{selected 8  resources.cred.die}}>D8</option>
+        <option value="10" {{selected 10 resources.cred.die}}>D10</option>
+        <option value="12" {{selected 12 resources.cred.die}}>D12</option>
+      </select>
+    </div>
+    <div class="resource-row">
+      <label>{{localize "FLATLINE.REP.Label"}}</label>
+      <input type="number" name="system.resources.rep.value" value="{{resources.rep.value}}" min="0"/>
+      <select name="system.resources.rep.die">
+        <option value="6"  {{selected 6  resources.rep.die}}>D6</option>
+        <option value="8"  {{selected 8  resources.rep.die}}>D8</option>
+        <option value="10" {{selected 10 resources.rep.die}}>D10</option>
+        <option value="12" {{selected 12 resources.rep.die}}>D12</option>
+      </select>
+    </div>
+    <div class="resource-row">
+      <label>XP</label>
+      <input type="number" name="system.resources.xp.value" value="{{resources.xp.value}}" min="0"/>
+      <span class="xp-spent">{{localize "FLATLINE.XP.Spent"}}: {{resources.xp.spent}}</span>
+    </div>
+  </div>
+
+  {{!-- TRAÇOS NARRATIVOS --}}
+  <div class="traits-section">
+    <div class="trait-field">
+      <label>{{localize "FLATLINE.Bio.TracoPersonalidade"}}</label>
+      <textarea name="system.bio.tracoPersonalidade" rows="2">{{bio.tracoPersonalidade}}</textarea>
+    </div>
+    <div class="trait-field">
+      <label>{{localize "FLATLINE.Bio.Orgulho"}}</label>
+      <textarea name="system.bio.orgulho" rows="2">{{bio.orgulho}}</textarea>
+    </div>
+    <div class="trait-field">
+      <label>{{localize "FLATLINE.Bio.ObjetivoFinal"}}</label>
+      <textarea name="system.bio.objetivoFinal" rows="2">{{bio.objetivoFinal}}</textarea>
+    </div>
+    <div class="trait-field">
+      <label>{{localize "FLATLINE.Bio.ArquivoMorto"}}</label>
+      <textarea name="system.bio.arquivoMorto" rows="2">{{bio.arquivoMorto}}</textarea>
+    </div>
+    <div class="trait-field">
+      <label>{{localize "FLATLINE.Bio.Vinculos"}}</label>
+      <textarea name="system.bio.vinculos" rows="3">{{bio.vinculos}}</textarea>
+    </div>
+    <div class="trait-field">
+      <label>{{localize "FLATLINE.Bio.Parceiro"}}</label>
+      <input type="text" name="system.bio.parceiro" value="{{bio.parceiro}}"/>
+    </div>
+  </div>
+
+  {{!-- ANTECEDENTE / BACKGROUND --}}
+  <div class="background-section">
+    <label>{{localize "FLATLINE.Bio.Background"}}</label>
+    {{editor system.background target="system.background" button=true engine="prosemirror" collaborate=false}}
+  </div>
+
+</div>

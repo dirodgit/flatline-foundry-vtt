@@ -1,0 +1,80 @@
+{{!-- FLATLINE | Ficha de Cyberware --}}
+<form class="flatline-sheet item-sheet cyberware-sheet" autocomplete="off">
+  <header class="item-sheet-header">
+    <img class="item-image" src="{{item.img}}" data-edit="img" alt="{{item.name}}"/>
+    <div class="item-header-fields">
+      <input class="item-name" type="text" name="name" value="{{item.name}}"/>
+      <span class="item-type-badge">{{localize "FLATLINE.ItemType.cyberware"}}</span>
+    </div>
+  </header>
+
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="details">{{localize "FLATLINE.Item.Tab.Details"}}</a>
+    <a class="item" data-tab="desc">{{localize "FLATLINE.Item.Tab.Desc"}}</a>
+  </nav>
+
+  <section class="sheet-body">
+    <div class="tab" data-tab="details">
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label>{{localize "FLATLINE.Cyberware.Categoria"}}</label>
+          <select name="system.categoria">
+            <option value="passivo" {{selected "passivo" system.categoria}}>{{localize "FLATLINE.Cyberware.Passivo"}}</option>
+            <option value="ativo"   {{selected "ativo"   system.categoria}}>{{localize "FLATLINE.Cyberware.Ativo"}}</option>
+            <option value="neural"  {{selected "neural"  system.categoria}}>{{localize "FLATLINE.Cyberware.Neural"}}</option>
+            <option value="cosmetic"{{selected "cosmetic" system.categoria}}>{{localize "FLATLINE.Cyberware.Cosmetic"}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>{{localize "FLATLINE.Cyberware.RAMCost"}}</label>
+          <input type="number" name="system.ramCost" value="{{system.ramCost}}" min="0" max="10"/>
+        </div>
+
+        <div class="form-group">
+          <label>{{localize "FLATLINE.Cyberware.DegradacaoInstalacao"}}</label>
+          <input type="number" name="system.degradacaoInstalacao" value="{{system.degradacaoInstalacao}}" min="0" max="5"
+                 data-tooltip="{{localize 'FLATLINE.Cyberware.DegradacaoInstalacaoHint'}}"/>
+        </div>
+
+        <div class="form-group">
+          <label>{{localize "FLATLINE.Item.Confiabilidade"}}</label>
+          <div class="conf-row">
+            <input type="number" name="system.confiabilidade.value" value="{{system.confiabilidade.value}}" min="0"/>
+            <span>/</span>
+            <input type="number" name="system.confiabilidade.max"   value="{{system.confiabilidade.max}}"   min="1"/>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>{{localize "FLATLINE.CRED.Label"}}</label>
+          <input type="number" name="system.cred" value="{{system.cred}}" min="0"/>
+        </div>
+
+        <div class="form-group checkbox-group">
+          <label>
+            <input type="checkbox" name="system.instalado" {{checked system.instalado}}/>
+            {{localize "FLATLINE.Cyberware.Instalado"}}
+          </label>
+        </div>
+
+        <div class="form-group checkbox-group">
+          <label>
+            <input type="checkbox" name="system.clinicaBeco" {{checked system.clinicaBeco}}/>
+            {{localize "FLATLINE.Cyberware.ClinicaBeco"}}
+          </label>
+        </div>
+
+        <div class="form-group full-width">
+          <label>{{localize "FLATLINE.Cyberware.Efeito"}}</label>
+          <textarea name="system.efeito" rows="3" placeholder="{{localize 'FLATLINE.Cyberware.EfeitoPlaceholder'}}">{{system.efeito}}</textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab" data-tab="desc">
+      {{editor system.description target="system.description" button=true engine="prosemirror" collaborate=false}}
+    </div>
+  </section>
+</form>

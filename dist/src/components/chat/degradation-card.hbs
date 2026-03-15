@@ -1,0 +1,21 @@
+{{!-- FLATLINE | Chat Card de Degradação --}}
+<div class="flatline-degradation-card">
+  <div class="deg-header">
+    <span class="deg-icon">⚡</span>
+    <div class="deg-info">
+      <span class="deg-actor">{{actor.name}}</span>
+      <span class="deg-title">{{localize "FLATLINE.Degradation.Roll"}}</span>
+    </div>
+    <span class="deg-die">D{{dieSize}}</span>
+  </div>
+  <div class="deg-result">
+    <span class="deg-value">{{result}}</span>
+    <div class="deg-effect">
+      <strong>{{effectTitle}}</strong>
+      <p>{{effectText}}</p>
+    </div>
+  </div>
+  <div class="deg-trail">
+    {{localize "FLATLINE.Degradation.Title"}}: {{degradationValue}} / 12
+  </div>
+</div>

@@ -1,0 +1,218 @@
+{
+  "FLATLINE": {
+    "SystemTitle": "FLATLINE",
+    "SystemSubtitle": "Cyberpunk Brasileiro 2099",
+
+    "Attribute": {
+      "Forca":     "Força",
+      "Agilidade": "Agilidade",
+      "Astucia":   "Astúcia",
+      "Empatia":   "Empatia"
+    },
+
+    "Skill": {
+      "Lutar":      "Lutar",
+      "Atirar":     "Atirar",
+      "Suportar":   "Suportar",
+      "Mover":      "Mover",
+      "Esgueirar":  "Esgueirar",
+      "Pilotar":    "Pilotar",
+      "Construir":  "Construir",
+      "Hackear":    "Hackear",
+      "Observar":   "Observar",
+      "Sobreviver": "Sobreviver",
+      "Persuadir":  "Persuadir",
+      "Intuir":     "Intuir",
+      "Curar":      "Curar",
+      "Manobrar":   "Manobrar"
+    },
+
+    "Archetype": {
+      "Mercenario": "Mercenário",
+      "Negociante": "Negociante",
+      "Holomante":  "Holomante",
+      "Tecnico":    "Técnico",
+      "Piloto":     "Piloto",
+      "Policial":   "Policial",
+      "Executivo":  "Executivo",
+      "Influencer": "Influencer",
+      "Medico":     "Médico"
+    },
+
+    "Range": {
+      "0": "Engajado",
+      "1": "Curto",
+      "2": "Médio",
+      "3": "Longo",
+      "4": "Extremo",
+      "Engajado": "Engajado",
+      "Curto":    "Curto",
+      "Medio":    "Médio",
+      "Longo":    "Longo",
+      "Extremo":  "Extremo"
+    },
+
+    "Roll": {
+      "RollAttribute":    "Rolar Atributo",
+      "RollSkill":        "Rolar Perícia",
+      "Success":          "Sucesso",
+      "BonusSuccess":     "Sucesso com Bônus",
+      "ExceptionalSuccess":"Sucesso Excepcional",
+      "Failure":          "Falha",
+      "Push":             "FORÇAR",
+      "Pushed":           "FORÇADA",
+      "PushTooltip":      "Forçar a rolagem — relança dados, gera Condições por glitches e +1 RAM",
+      "PushHint":         "Forçar tem custo. Glitches geram Condições.",
+      "GlitchAttribute":  "Glitch no dado de Atributo — Condição aplicada",
+      "GlitchSkill":      "Glitch no dado de Perícia — Condição aplicada",
+      "GlitchEquip":      "Glitch no dado de Equipamento — 1 Confiabilidade perdida"
+    },
+
+    "Condition": {
+      "Add":          "Adicionar Condição",
+      "AddTitle":     "Nova Condição",
+      "LabelPlaceholder": "Descreva a condição... (ex: 'Bala alojada no ombro')",
+      "Describe":     "Descreva...",
+      "Remove":       "Remover Condição",
+      "FromForce":    "Condição de Forçar a rolagem",
+      "leve":         "Leve",
+      "moderada":     "Moderada",
+      "severa":       "Severa"
+    },
+
+    "Conditions": {
+      "Title":   "Condições",
+      "Fisica":  "FÍSICA",
+      "Mental":  "MENTAL",
+      "Broken":  "QUEBRADO"
+    },
+
+    "Broken": "{name} está Quebrado ({tipo})! Role Lesão Crítica (D66).",
+
+    "CriticalInjury": {
+      "Roll": "Lesão Crítica ({tipo})"
+    },
+
+    "Degradation": {
+      "Title":   "Degradação",
+      "Die":     "Dado",
+      "Roll":    "Rolar Dado de Degradação",
+      "RollBtn": "Rolar Degradação"
+    },
+
+    "RAM": {
+      "Threshold":   "Limiar",
+      "Insufficient":"RAM insuficiente.",
+      "ThresholdExceeded": "{points} ponto(s) de Degradação por ultrapassar o Limiar de RAM.",
+      "Reset":       "Resetar RAM"
+    },
+
+    "CRED": {
+      "Label": "CRED",
+      "Die":   "Dado de CRED"
+    },
+
+    "REP": {
+      "Label": "REP"
+    },
+
+    "XP": {
+      "Spent": "Gasto"
+    },
+
+    "Holomatriz": {
+      "Label": "Holomatriz"
+    },
+
+    "InterfaceNeural": {
+      "Label": "Interface Neural"
+    },
+
+    "TagID": {
+      "Label": "Tag ID Ativa"
+    },
+
+    "Holomancia": {
+      "RequiresInterface": "Holomancia requer Interface Neural instalada."
+    },
+
+    "Programa": {
+      "Crackeado": "CRACKEADO"
+    },
+
+    "Bio": {
+      "TracoPersonalidade": "Traço de Personalidade",
+      "Orgulho":            "Orgulho",
+      "ObjetivoFinal":      "Objetivo Final",
+      "ArquivoMorto":       "Arquivo Morto",
+      "Vinculos":           "Vínculos",
+      "Parceiro":           "Parceiro",
+      "Background":         "Antecedente"
+    },
+
+    "Combat": {
+      "Initiative":     "Iniciativa",
+      "InitiativeHint": "Compre cartas numeradas de 1 a 10. Número menor age primeiro."
+    },
+
+    "Carga": {
+      "Label": "Carga",
+      "Slots": "slots"
+    },
+
+    "Item": {
+      "New":          "Novo {type}",
+      "Create":       "Criar Item",
+      "Edit":         "Editar",
+      "Delete":       "Deletar",
+      "DeleteTitle":  "Confirmar Exclusão",
+      "DeleteContent":"Deletar \"{name}\"? Esta ação não pode ser desfeita.",
+      "Roll":         "Rolar com este item",
+      "Post":         "Enviar para o chat",
+      "Broken":       "{name} quebrou (Confiabilidade 0)!",
+      "DurabilityLost":"{actor}: equipamento perdeu 1 Confiabilidade (glitch).",
+      "Dano":         "Dano",
+      "Armadura":     "Armadura",
+      "Permanente":   "PERMANENTE"
+    },
+
+    "ItemType": {
+      "arma":         "Arma",
+      "armadura":     "Armadura",
+      "cyberware":    "Cyberware",
+      "programa":     "Programa",
+      "especialidade":"Especialidade",
+      "equipamento":  "Equipamento",
+      "lesao":        "Lesão Crítica"
+    },
+
+    "Sheet": {
+      "Concept": "Conceito do personagem...",
+      "Tab": {
+        "Stats":      "Stats",
+        "Combat":     "Combate",
+        "Inventory":  "Inventário",
+        "Holomancia": "Holomancia",
+        "Bio":        "Bio"
+      }
+    },
+
+    "Skill": {
+      "MarkUsed":  "Marcar como usada (XP)",
+      "UsedXP":    "Perícia usada nesta sessão — elegível para melhoria com XP"
+    },
+
+    "ActorType": {
+      "corredor": "Corredor",
+      "veiculo":  "Veículo",
+      "ameaca":   "Ameaça"
+    },
+
+    "Settings": {
+      "ShowDegradationDialog":      "Mostrar diálogo ao rolar Degradação",
+      "ShowDegradationDialogHint":  "Exibe um diálogo com o efeito narrativo ao rolar o Dado de Degradação.",
+      "AutoConditions":             "Aplicar Condições automáticas",
+      "AutoConditionsHint":         "Aplica Condições automaticamente ao Forçar rolagens com glitches."
+    }
+  }
+}

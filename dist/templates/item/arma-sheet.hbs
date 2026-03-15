@@ -1,0 +1,83 @@
+{{!-- FLATLINE | Ficha de Arma --}}
+<form class="flatline-sheet item-sheet arma-sheet" autocomplete="off">
+  <header class="item-sheet-header">
+    <img class="item-image" src="{{item.img}}" data-edit="img" alt="{{item.name}}"/>
+    <div class="item-header-fields">
+      <input class="item-name" type="text" name="name" value="{{item.name}}"/>
+      <span class="item-type-badge">{{localize "FLATLINE.ItemType.arma"}}</span>
+    </div>
+  </header>
+
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="details">{{localize "FLATLINE.Item.Tab.Details"}}</a>
+    <a class="item" data-tab="desc">{{localize "FLATLINE.Item.Tab.Desc"}}</a>
+  </nav>
+
+  <section class="sheet-body">
+    <div class="tab" data-tab="details">
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label>{{localize "FLATLINE.Item.Dano"}}</label>
+          <input type="number" name="system.dano" value="{{system.dano}}" min="1" max="10"/>
+        </div>
+
+        <div class="form-group">
+          <label>{{localize "FLATLINE.Item.Alcance"}}</label>
+          <select name="system.alcance">
+            {{#each ranges}}
+              <option value="{{this.value}}" {{selected this.value ../system.alcance}}>{{this.label}}</option>
+            {{/each}}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>{{localize "FLATLINE.Arma.Categoria"}}</label>
+          <select name="system.categoria">
+            <option value="leve"   {{selected "leve"   system.categoria}}>{{localize "FLATLINE.Arma.Leve"}}</option>
+            <option value="media"  {{selected "media"  system.categoria}}>{{localize "FLATLINE.Arma.Media"}}</option>
+            <option value="pesada" {{selected "pesada" system.categoria}}>{{localize "FLATLINE.Arma.Pesada"}}</option>
+            <option value="corpo"  {{selected "corpo"  system.categoria}}>{{localize "FLATLINE.Arma.Corpo"}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>{{localize "FLATLINE.Arma.CDT"}}</label>
+          <input type="number" name="system.cdt" value="{{system.cdt}}" min="0" max="10"
+                 data-tooltip="{{localize 'FLATLINE.Arma.CDTHint'}}"/>
+        </div>
+
+        <div class="form-group">
+          <label>{{localize "FLATLINE.Item.Confiabilidade"}}</label>
+          <div class="conf-row">
+            <input type="number" name="system.confiabilidade.value" value="{{system.confiabilidade.value}}" min="0" max="{{system.confiabilidade.max}}"/>
+            <span>/</span>
+            <input type="number" name="system.confiabilidade.max"   value="{{system.confiabilidade.max}}"   min="1" max="12"/>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>{{localize "FLATLINE.CRED.Label"}}</label>
+          <input type="number" name="system.cred" value="{{system.cred}}" min="0"/>
+        </div>
+
+        <div class="form-group checkbox-group">
+          <label>
+            <input type="checkbox" name="system.oculta" {{checked system.oculta}}/>
+            {{localize "FLATLINE.Arma.Oculta"}}
+          </label>
+        </div>
+
+        <div class="form-group full-width">
+          <label>{{localize "FLATLINE.Item.Especial"}}</label>
+          <input type="text" name="system.especial" value="{{system.especial}}"
+                 placeholder="{{localize 'FLATLINE.Item.EspecialPlaceholder'}}"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab" data-tab="desc">
+      {{editor system.description target="system.description" button=true engine="prosemirror" collaborate=false}}
+    </div>
+  </section>
+</form>

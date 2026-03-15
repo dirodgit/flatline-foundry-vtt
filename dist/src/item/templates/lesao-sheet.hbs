@@ -1,0 +1,57 @@
+{{!-- FLATLINE | Ficha de Lesão Crítica --}}
+<form class="flatline-sheet item-sheet lesao-sheet" autocomplete="off">
+  <header class="item-sheet-header">
+    <img class="item-image" src="{{item.img}}" data-edit="img" alt="{{item.name}}"/>
+    <div class="item-header-fields">
+      <input class="item-name" type="text" name="name" value="{{item.name}}"/>
+      <span class="item-type-badge lesao-badge">{{localize "FLATLINE.ItemType.lesao"}}</span>
+    </div>
+  </header>
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="details">{{localize "FLATLINE.Item.Tab.Details"}}</a>
+    <a class="item" data-tab="desc">{{localize "FLATLINE.Item.Tab.Desc"}}</a>
+  </nav>
+  <section class="sheet-body">
+    <div class="tab" data-tab="details">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>{{localize "FLATLINE.Lesao.Categoria"}}</label>
+          <select name="system.categoria">
+            <option value="fisica" {{selected "fisica" system.categoria}}>{{localize "FLATLINE.Conditions.Fisica"}}</option>
+            <option value="mental" {{selected "mental" system.categoria}}>{{localize "FLATLINE.Conditions.Mental"}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>{{localize "FLATLINE.Lesao.Codigo"}}</label>
+          <input type="text" name="system.codigo" value="{{system.codigo}}"
+                 placeholder="11–66" style="width:60px"/>
+        </div>
+        <div class="form-group checkbox-group">
+          <label>
+            <input type="checkbox" name="system.permanente" {{checked system.permanente}}/>
+            {{localize "FLATLINE.Lesao.Permanente"}}
+          </label>
+        </div>
+        <div class="form-group checkbox-group">
+          <label>
+            <input type="checkbox" name="system.letal" {{checked system.letal}}/>
+            {{localize "FLATLINE.Lesao.Letal"}}
+          </label>
+        </div>
+        <div class="form-group full-width">
+          <label>{{localize "FLATLINE.Lesao.Penalidade"}}</label>
+          <input type="text" name="system.penalidade" value="{{system.penalidade}}"
+                 placeholder="ex: -2 em Mover"/>
+        </div>
+        <div class="form-group full-width">
+          <label>{{localize "FLATLINE.Lesao.Tratamento"}}</label>
+          <input type="text" name="system.tratamento" value="{{system.tratamento}}"
+                 placeholder="ex: Requer cirurgia"/>
+        </div>
+      </div>
+    </div>
+    <div class="tab" data-tab="desc">
+      {{editor system.description target="system.description" button=true engine="prosemirror" collaborate=false}}
+    </div>
+  </section>
+</form>

@@ -1,0 +1,234 @@
+{{!-- FLATLINE | Aba: Atributos & Perícias --}}
+<div class="stats-tab">
+
+  {{!-- ATRIBUTOS + PERÍCIAS --}}
+  <div class="attributes-skills-grid">
+
+    {{!-- FORÇA --}}
+    <div class="attribute-column" data-attribute="forca">
+      <div class="attribute-header">
+        <button class="roll-attribute attribute-btn" data-attribute="forca" data-tooltip="{{localize 'FLATLINE.Roll.RollAttribute'}}">
+          <span class="attr-label">{{localize "FLATLINE.Attribute.Forca"}}</span>
+          <span class="attr-die die-{{attributes.forca.dieLetter}}">{{attributes.forca.dieLetter}}</span>
+        </button>
+        <input class="attr-value" type="number" name="system.attributes.forca.value"
+               value="{{attributes.forca.value}}" min="6" max="12" step="2"/>
+        {{#if attributes.forca.penalty}}
+          <span class="attr-penalty">-{{attributes.forca.penalty}}</span>
+        {{/if}}
+      </div>
+      <ul class="skills-list">
+        {{#each skillsByAttribute.forca}}
+          <li class="skill-item" data-skill="{{this.key}}">
+            <button class="roll-skill skill-roll-btn" data-skill="{{this.key}}" data-tooltip="{{localize 'FLATLINE.Roll.RollSkill'}}">
+              <span class="skill-name">{{this.label}}</span>
+              <span class="skill-die die-letter-{{this.dieLetter}}">{{this.dieLetter}}</span>
+            </button>
+            <select class="skill-value-select" name="system.skills.{{this.key}}.value">
+              <option value="0"  {{selected 0  this.value}}>—</option>
+              <option value="6"  {{selected 6  this.value}}>D</option>
+              <option value="8"  {{selected 8  this.value}}>C</option>
+              <option value="10" {{selected 10 this.value}}>B</option>
+              <option value="12" {{selected 12 this.value}}>A</option>
+            </select>
+            <span class="skill-used skill-used-toggle {{#if this.used}}active{{/if}}" data-skill="{{this.key}}"
+                  data-tooltip="{{localize 'FLATLINE.Skill.MarkUsed'}}" title="{{localize 'FLATLINE.Skill.UsedXP'}}">★</span>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+
+    {{!-- AGILIDADE --}}
+    <div class="attribute-column" data-attribute="agilidade">
+      <div class="attribute-header">
+        <button class="roll-attribute attribute-btn" data-attribute="agilidade" data-tooltip="{{localize 'FLATLINE.Roll.RollAttribute'}}">
+          <span class="attr-label">{{localize "FLATLINE.Attribute.Agilidade"}}</span>
+          <span class="attr-die die-{{attributes.agilidade.dieLetter}}">{{attributes.agilidade.dieLetter}}</span>
+        </button>
+        <input class="attr-value" type="number" name="system.attributes.agilidade.value"
+               value="{{attributes.agilidade.value}}" min="6" max="12" step="2"/>
+        {{#if attributes.agilidade.penalty}}
+          <span class="attr-penalty">-{{attributes.agilidade.penalty}}</span>
+        {{/if}}
+      </div>
+      <ul class="skills-list">
+        {{#each skillsByAttribute.agilidade}}
+          <li class="skill-item" data-skill="{{this.key}}">
+            <button class="roll-skill skill-roll-btn" data-skill="{{this.key}}">
+              <span class="skill-name">{{this.label}}</span>
+              <span class="skill-die">{{this.dieLetter}}</span>
+            </button>
+            <select class="skill-value-select" name="system.skills.{{this.key}}.value">
+              <option value="0"  {{selected 0  this.value}}>—</option>
+              <option value="6"  {{selected 6  this.value}}>D</option>
+              <option value="8"  {{selected 8  this.value}}>C</option>
+              <option value="10" {{selected 10 this.value}}>B</option>
+              <option value="12" {{selected 12 this.value}}>A</option>
+            </select>
+            <span class="skill-used skill-used-toggle {{#if this.used}}active{{/if}}" data-skill="{{this.key}}">★</span>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+
+    {{!-- ASTÚCIA --}}
+    <div class="attribute-column" data-attribute="astucia">
+      <div class="attribute-header">
+        <button class="roll-attribute attribute-btn" data-attribute="astucia">
+          <span class="attr-label">{{localize "FLATLINE.Attribute.Astucia"}}</span>
+          <span class="attr-die die-{{attributes.astucia.dieLetter}}">{{attributes.astucia.dieLetter}}</span>
+        </button>
+        <input class="attr-value" type="number" name="system.attributes.astucia.value"
+               value="{{attributes.astucia.value}}" min="6" max="12" step="2"/>
+        {{#if attributes.astucia.penalty}}
+          <span class="attr-penalty">-{{attributes.astucia.penalty}}</span>
+        {{/if}}
+      </div>
+      <ul class="skills-list">
+        {{#each skillsByAttribute.astucia}}
+          <li class="skill-item" data-skill="{{this.key}}">
+            <button class="roll-skill skill-roll-btn" data-skill="{{this.key}}">
+              <span class="skill-name">{{this.label}}</span>
+              <span class="skill-die">{{this.dieLetter}}</span>
+            </button>
+            <select class="skill-value-select" name="system.skills.{{this.key}}.value">
+              <option value="0"  {{selected 0  this.value}}>—</option>
+              <option value="6"  {{selected 6  this.value}}>D</option>
+              <option value="8"  {{selected 8  this.value}}>C</option>
+              <option value="10" {{selected 10 this.value}}>B</option>
+              <option value="12" {{selected 12 this.value}}>A</option>
+            </select>
+            <span class="skill-used skill-used-toggle {{#if this.used}}active{{/if}}" data-skill="{{this.key}}">★</span>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+
+    {{!-- EMPATIA --}}
+    <div class="attribute-column" data-attribute="empatia">
+      <div class="attribute-header">
+        <button class="roll-attribute attribute-btn" data-attribute="empatia">
+          <span class="attr-label">{{localize "FLATLINE.Attribute.Empatia"}}</span>
+          <span class="attr-die die-{{attributes.empatia.dieLetter}}">{{attributes.empatia.dieLetter}}</span>
+        </button>
+        <input class="attr-value" type="number" name="system.attributes.empatia.value"
+               value="{{attributes.empatia.value}}" min="6" max="12" step="2"/>
+        {{#if attributes.empatia.penalty}}
+          <span class="attr-penalty">-{{attributes.empatia.penalty}}</span>
+        {{/if}}
+      </div>
+      <ul class="skills-list">
+        {{#each skillsByAttribute.empatia}}
+          <li class="skill-item" data-skill="{{this.key}}">
+            <button class="roll-skill skill-roll-btn" data-skill="{{this.key}}">
+              <span class="skill-name">{{this.label}}</span>
+              <span class="skill-die">{{this.dieLetter}}</span>
+            </button>
+            <select class="skill-value-select" name="system.skills.{{this.key}}.value">
+              <option value="0"  {{selected 0  this.value}}>—</option>
+              <option value="6"  {{selected 6  this.value}}>D</option>
+              <option value="8"  {{selected 8  this.value}}>C</option>
+              <option value="10" {{selected 10 this.value}}>B</option>
+              <option value="12" {{selected 12 this.value}}>A</option>
+            </select>
+            <span class="skill-used skill-used-toggle {{#if this.used}}active{{/if}}" data-skill="{{this.key}}">★</span>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+
+  </div>{{!-- /attributes-skills-grid --}}
+
+  {{!-- CONDIÇÕES --}}
+  <div class="conditions-section">
+    <h3 class="section-label">{{localize "FLATLINE.Conditions.Title"}}</h3>
+    <div class="conditions-grid">
+
+      {{!-- Físicas --}}
+      <div class="condition-column fisica">
+        <div class="condition-header">
+          <span>{{localize "FLATLINE.Conditions.Fisica"}}</span>
+          <span class="penalty-badge {{#if physicalPenalty}}active{{/if}}">{{#if physicalPenalty}}-{{physicalPenalty}}{{/if}}</span>
+          <button class="condition-add" data-tipo="fisica" data-tooltip="{{localize 'FLATLINE.Condition.Add'}}">+</button>
+        </div>
+        {{#each-in conditions.fisica}}
+          {{#unless (eq @key "broken")}}
+          <div class="condition-row grade-{{@key}} {{#if this.active}}active{{/if}}">
+            <span class="condition-grade-label">{{localize (concat "FLATLINE.Condition." @key)}}</span>
+            {{#if this.active}}
+              <input type="text" class="condition-label" data-tipo="fisica" data-grade="{{@key}}"
+                     value="{{this.label}}" placeholder="{{localize 'FLATLINE.Condition.Describe'}}"/>
+              <button class="condition-remove" data-tipo="fisica" data-tooltip="{{localize 'FLATLINE.Condition.Remove'}}">✕</button>
+            {{else}}
+              <span class="condition-empty">—</span>
+            {{/if}}
+          </div>
+          {{/unless}}
+        {{/each-in}}
+        {{#if conditions.fisica.broken}}
+          <div class="condition-row broken active">
+            <span class="broken-label">⚡ {{localize "FLATLINE.Conditions.Broken"}}</span>
+          </div>
+        {{/if}}
+      </div>
+
+      {{!-- Mentais --}}
+      <div class="condition-column mental">
+        <div class="condition-header">
+          <span>{{localize "FLATLINE.Conditions.Mental"}}</span>
+          <span class="penalty-badge {{#if mentalPenalty}}active{{/if}}">{{#if mentalPenalty}}-{{mentalPenalty}}{{/if}}</span>
+          <button class="condition-add" data-tipo="mental" data-tooltip="{{localize 'FLATLINE.Condition.Add'}}">+</button>
+        </div>
+        {{#each-in conditions.mental}}
+          {{#unless (eq @key "broken")}}
+          <div class="condition-row grade-{{@key}} {{#if this.active}}active{{/if}}">
+            <span class="condition-grade-label">{{localize (concat "FLATLINE.Condition." @key)}}</span>
+            {{#if this.active}}
+              <input type="text" class="condition-label" data-tipo="mental" data-grade="{{@key}}"
+                     value="{{this.label}}" placeholder="{{localize 'FLATLINE.Condition.Describe'}}"/>
+              <button class="condition-remove" data-tipo="mental" data-tooltip="{{localize 'FLATLINE.Condition.Remove'}}">✕</button>
+            {{else}}
+              <span class="condition-empty">—</span>
+            {{/if}}
+          </div>
+          {{/unless}}
+        {{/each-in}}
+        {{#if conditions.mental.broken}}
+          <div class="condition-row broken active">
+            <span class="broken-label">⚡ {{localize "FLATLINE.Conditions.Broken"}}</span>
+          </div>
+        {{/if}}
+      </div>
+
+    </div>{{!-- /conditions-grid --}}
+  </div>
+
+  {{!-- TRILHA DE DEGRADAÇÃO --}}
+  <div class="degradation-section">
+    <div class="degradation-header">
+      <h3 class="section-label">{{localize "FLATLINE.Degradation.Title"}}</h3>
+      <span class="degradation-die-label">{{localize "FLATLINE.Degradation.Die"}}: D{{degradationDie}}</span>
+      <button class="roll-degradation" data-tooltip="{{localize 'FLATLINE.Degradation.Roll'}}">
+        🎲 {{localize "FLATLINE.Degradation.RollBtn"}}
+      </button>
+    </div>
+    <div class="degradation-trail">
+      {{#each degradationTrail}}
+        <div class="degradation-step {{this.level}} {{#if this.active}}active{{/if}}"
+             data-index="{{this.index}}"
+             data-tooltip="{{this.index}}"
+             title="{{this.index}}">
+          <span>{{this.index}}</span>
+        </div>
+      {{/each}}
+    </div>
+    <div class="degradation-levels-legend">
+      <span class="cicatriz">1–3 Cicatrizes</span>
+      <span class="falha">4–6 Falhas</span>
+      <span class="colapso">7–9 Colapso</span>
+      <span class="falencia">10–11 Falência</span>
+      <span class="flatline">12 FLATLINE</span>
+    </div>
+  </div>
+
+</div>{{!-- /stats-tab --}}

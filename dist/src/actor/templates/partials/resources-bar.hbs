@@ -1,0 +1,21 @@
+{{!-- FLATLINE | Partial: Barra de Recursos --}}
+<div class="resources-bar">
+  <div class="resource-chip cred">
+    <span class="res-label">CRED</span>
+    <input type="number" name="system.resources.cred.value" value="{{system.resources.cred.value}}" min="0"/>
+    <span class="res-die">D{{system.resources.cred.die}}</span>
+  </div>
+  <div class="resource-chip rep">
+    <span class="res-label">REP</span>
+    <input type="number" name="system.resources.rep.value" value="{{system.resources.rep.value}}" min="0"/>
+    <span class="res-die">D{{system.resources.rep.die}}</span>
+  </div>
+  <div class="resource-chip xp">
+    <span class="res-label">XP</span>
+    <input type="number" name="system.resources.xp.value" value="{{system.resources.xp.value}}" min="0"/>
+  </div>
+  <div class="resource-chip ram">
+    <span class="res-label">RAM</span>
+    <span class="res-value">{{system.resources.ram.value}}/{{system.resources.ram.max}}</span>
+  </div>
+</div>

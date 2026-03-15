@@ -1,0 +1,50 @@
+{{!-- FLATLINE | Chat Card de Item --}}
+<div class="flatline-item-card {{item.type}}">
+  <div class="item-card-header">
+    <img class="item-card-img" src="{{item.img}}" alt="{{item.name}}"/>
+    <div class="item-card-info">
+      <span class="item-card-name">{{item.name}}</span>
+      <span class="item-card-type">{{localize (concat "FLATLINE.ItemType." item.type)}}</span>
+    </div>
+  </div>
+
+  {{#if isArma}}
+  <div class="item-card-stats">
+    <span class="stat">⚔ {{localize "FLATLINE.Item.Dano"}}: {{data.dano}}</span>
+    <span class="stat">📍 {{localize (concat "FLATLINE.Range." data.alcance)}}</span>
+    {{#if data.cdt}}<span class="stat">CDT: {{data.cdt}}</span>{{/if}}
+    {{#if data.oculta}}<span class="stat tag">{{localize "FLATLINE.Arma.Oculta"}}</span>{{/if}}
+  </div>
+  {{/if}}
+
+  {{#if isCyberware}}
+  <div class="item-card-stats">
+    <span class="stat">{{data.categoria}}</span>
+    {{#if data.ramCost}}<span class="stat">{{data.ramCost}} RAM</span>{{/if}}
+    {{#if data.clinicaBeco}}<span class="stat tag warn">{{localize "FLATLINE.Cyberware.ClinicaBeco"}}</span>{{/if}}
+  </div>
+  {{#if data.efeito}}<p class="item-card-effect">{{data.efeito}}</p>{{/if}}
+  {{/if}}
+
+  {{#if isPrograma}}
+  <div class="item-card-stats">
+    <span class="stat">{{data.disciplina}}</span>
+    <span class="stat">N{{data.nivel}}</span>
+    <span class="stat">{{data.ramCost}} RAM</span>
+    {{#if data.crackeado}}<span class="stat tag warn">{{localize "FLATLINE.Programa.Crackeado"}}</span>{{/if}}
+  </div>
+  {{/if}}
+
+  {{#if isLesao}}
+  <div class="item-card-stats lesao-stats">
+    <span class="stat code">{{data.codigo}}</span>
+    {{#if data.permanente}}<span class="stat tag danger">{{localize "FLATLINE.Item.Permanente"}}</span>{{/if}}
+    {{#if data.letal}}<span class="stat tag danger">{{localize "FLATLINE.Lesao.Letal"}}</span>{{/if}}
+    {{#if data.penalidade}}<span class="stat penalty">{{data.penalidade}}</span>{{/if}}
+  </div>
+  {{/if}}
+
+  {{#if data.description}}
+  <div class="item-card-desc">{{enrichHTML data.description}}</div>
+  {{/if}}
+</div>

@@ -1,0 +1,173 @@
+{
+  "Actor": {
+    "types": ["corredor", "veiculo", "ameaca"],
+    "templates": {
+      "base": {
+        "description": ""
+      },
+      "atributosEPericias": {
+        "attributes": {
+          "forca":    { "value": 8 },
+          "agilidade":{ "value": 8 },
+          "astucia":  { "value": 8 },
+          "empatia":  { "value": 8 }
+        },
+        "skills": {
+          "lutar":     { "value": 0, "used": false },
+          "atirar":    { "value": 0, "used": false },
+          "suportar":  { "value": 0, "used": false },
+          "mover":     { "value": 0, "used": false },
+          "esgueirar": { "value": 0, "used": false },
+          "pilotar":   { "value": 0, "used": false },
+          "construir": { "value": 0, "used": false },
+          "hackear":   { "value": 0, "used": false },
+          "observar":  { "value": 0, "used": false },
+          "sobreviver":{ "value": 0, "used": false },
+          "persuadir": { "value": 0, "used": false },
+          "intuir":    { "value": 0, "used": false },
+          "curar":     { "value": 0, "used": false }
+        }
+      },
+      "condicoes": {
+        "conditions": {
+          "fisica": {
+            "leve":     { "active": false, "label": "" },
+            "moderada": { "active": false, "label": "" },
+            "severa":   { "active": false, "label": "" },
+            "broken":   false
+          },
+          "mental": {
+            "leve":     { "active": false, "label": "" },
+            "moderada": { "active": false, "label": "" },
+            "severa":   { "active": false, "label": "" },
+            "broken":   false
+          }
+        }
+      },
+      "degradacao": {
+        "degradation": {
+          "value": 0,
+          "max": 12
+        }
+      },
+      "recursos": {
+        "cred": { "value": 2, "die": 6 },
+        "rep":  { "value": 0, "die": 6 },
+        "ram":  { "value": 0, "max": 10 },
+        "xp":   { "value": 0, "spent": 0 }
+      },
+      "holomatriz": {
+        "holomatriz": {
+          "active": true,
+          "interfaceNeural": false,
+          "tagActive": true
+        }
+      }
+    },
+    "corredor": {
+      "templates": [
+        "base",
+        "atributosEPericias",
+        "condicoes",
+        "degradacao",
+        "recursos",
+        "holomatriz"
+      ],
+      "archetype": "mercenario",
+      "concept": "",
+      "bio": {
+        "arquivoMorto": "",
+        "orgulho": "",
+        "objetivoFinal": "",
+        "vinculos": "",
+        "parceiro": "",
+        "tracoPersonalidade": ""
+      },
+      "background": "",
+      "carga": { "max": 6 }
+    },
+    "veiculo": {
+      "templates": ["base"],
+      "velocidade": 3,
+      "manobra": 8,
+      "armadura": 0,
+      "confiabilidade": { "value": 5, "max": 5 },
+      "passageiros": 4,
+      "tripulacao": []
+    },
+    "ameaca": {
+      "templates": [
+        "base",
+        "atributosEPericias",
+        "condicoes"
+      ],
+      "threat": "medio"
+    }
+  },
+  "Item": {
+    "types": ["arma", "armadura", "cyberware", "programa", "especialidade", "equipamento", "lesao"],
+    "templates": {
+      "base": {
+        "description": "",
+        "cred": 0
+      },
+      "confiabilidade": {
+        "confiabilidade": { "value": 6, "max": 6 }
+      },
+      "ofensivo": {
+        "dano": 2,
+        "alcance": 1,
+        "especial": ""
+      }
+    },
+    "arma": {
+      "templates": ["base", "confiabilidade", "ofensivo"],
+      "categoria": "leve",
+      "cdt": 0,
+      "oculta": false,
+      "quantidade": 1
+    },
+    "armadura": {
+      "templates": ["base", "confiabilidade"],
+      "armadura": 1,
+      "coberturas": []
+    },
+    "cyberware": {
+      "templates": ["base", "confiabilidade"],
+      "categoria": "passivo",
+      "ramCost": 0,
+      "degradacaoInstalacao": 1,
+      "instalado": false,
+      "clinicaBeco": false,
+      "efeito": ""
+    },
+    "programa": {
+      "templates": ["base"],
+      "disciplina": "",
+      "nivel": 1,
+      "ramCost": 1,
+      "confiabilidade": { "value": 6, "max": 6 },
+      "crackeado": false
+    },
+    "especialidade": {
+      "templates": ["base"],
+      "arquetipo": "",
+      "geral": true,
+      "prereqs": ""
+    },
+    "equipamento": {
+      "templates": ["base", "confiabilidade"],
+      "quantidade": 1,
+      "peso": 1
+    },
+    "lesao": {
+      "templates": ["base"],
+      "categoria": "fisica",
+      "codigo": "11",
+      "permanente": false,
+      "letal": false,
+      "tratamento": "",
+      "penalidade": ""
+    }
+  }
+}
