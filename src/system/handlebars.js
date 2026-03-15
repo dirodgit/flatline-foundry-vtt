@@ -5,6 +5,19 @@ import { SYSTEM_ID } from '@system/constants.js';
  */
 export function registerHandlebarsHelpers() {
 
+  // {{#each-in obj}} — itera chaves/valores de objeto (removido no Foundry v13)
+  Handlebars.registerHelper('each-in', function(obj, options) {
+    if (!obj) return options.inverse(this);
+    let result = '';
+    for (const [key, value] of Object.entries(obj)) {
+      const data = Handlebars.createFrame(options.data);
+      data.key = key;
+      result += options.fn(value, { data });
+    }
+    return result || options.inverse(this);
+  });
+
+
   // {{selected value compare}} — equivale a selected="selected"
   Handlebars.registerHelper('selected', (value, compare) =>
     String(value) === String(compare) ? 'selected' : ''
